@@ -14,20 +14,20 @@ class Node:
         self.cpt = cpt
         self.nature = nature
         self.status = ''
-    
+
     def __hash__(self):
         return self.name
-    
+
     def setStatus(self, status):
         self.status = status
-    
+
     def translateParent(self):
         str = ''
         for p in self.parents:
             str+=p.status
-        
+
         return str
-    
+
     #this function should only be used to initialize the root node based on its characters table
     def startRoot(self):
         i = randint(0, 1000) / 1000
@@ -37,6 +37,13 @@ class Node:
                 self.status = key
                 return
             prev = value + prev
-        
 
-    
+    def startNode(self):
+        i = randint(0, 1000) / 1000
+        if i <= cpt[self.translateParent()]:
+            self.setStatus(nature[0])
+        else:
+            self.setStatus(nature[1])
+
+
+
