@@ -64,12 +64,32 @@ for i in range(0,len(args.observed)):
 
 print(observedList)
 print(observedCondition)
+countobserved = 0
+countquery = 0
 node = Node(None,None,None,None,None)
+for i in range(0, args.iteration):
+    isobserved = True
+    testtree = tree.createTree()
+    testtree.startTree()
+    for node in testtree.nodes:
+        name = node.name
+        if name in observedList:
+            if observedCondition[observedList.index(name)] != node.status:
+                isobserved = False
 
-testtree = tree.createTree()
-testtree.startTree()
-for i in range(0,len(testtree.nodes)):
-    print(testtree.nodes[i].status)
+    if isobserved:
+        countobserved += 1
+        for node in testtree.nodes:
+            if node.name in queryList:
+                name = node.name
+                if queryCondition[queryList.index(name)] == node.status:
+                    countquery += 1
+
+
+if (countobserved != 0):
+    print("Probability: " + str(countquery/countobserved))
+else:
+    print("No node with observed condition found")
 
 
 

@@ -33,7 +33,7 @@ class Node:
         i = randint(0, 1000) / 1000
         prev = 0.0
         for key, value in self.characters.items():
-            if i >= prev and i < value + prev:
+            if i >= prev and i <= value + prev:
                 self.status = key
                 return
             prev = value + prev
@@ -44,6 +44,3 @@ class Node:
             self.setStatus(self.nature[0])
         else:
             self.setStatus(self.nature[1])
-
-
-
