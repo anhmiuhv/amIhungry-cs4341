@@ -38,10 +38,13 @@ for i in args.query:
         else:
             query += i
 
+query = query.lower()
+condition = condition.lower()
+
 queryList.append(query)
 queryCondition.append(condition)
-print(queryList)
-print(queryCondition)
+#print(queryList)
+#print(queryCondition)
 observedList = []
 observedCondition = []
 query = ''
@@ -56,14 +59,16 @@ for i in range(0,len(args.observed)):
                 condition +=j
             else:
                 query += j
+    query = query.lower()
+    condition = condition.lower()
     observedList.append(query)
     observedCondition.append(condition)
     query = ''
     condition = ''
     take = 0
 
-print(observedList)
-print(observedCondition)
+#print(observedList)
+#print(observedCondition)
 countobserved = 0
 countquery = 0
 node = Node(None,None,None,None,None)
@@ -85,11 +90,12 @@ for i in range(0, args.iteration):
                 if queryCondition[queryList.index(name)] == node.status:
                     countquery += 1
 
-
+print("Total number of samples: ", str(args.iteration))
+print("Number of non-rejected samples: ", str(countobserved))
 if (countobserved != 0):
-    print("Probability: " + str(countquery/countobserved))
+    print("Probability of the queried node: " + str(countquery/countobserved))
 else:
-    print("No node with observed condition found")
+    print("No node with observed condition found.")
 
 
 
