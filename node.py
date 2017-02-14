@@ -40,10 +40,10 @@ class Node:
 
     def startNode(self):
         i = randint(0, 1000) / 1000
-        if i <= cpt[self.translateParent()]:
-            self.setStatus(nature[0])
+        if i <= self.cpt[self.translateParent()]:
+            self.setStatus(self.nature[0])
         else:
-            self.setStatus(nature[1])
+            self.setStatus(self.nature[1])
 
 
 

@@ -37,7 +37,7 @@ for i in args.query:
             condition +=i
         else:
             query += i
-        
+
 queryList.append(query)
 queryCondition.append(condition)
 print(queryList)
@@ -61,15 +61,16 @@ for i in range(0,len(args.observed)):
     query = ''
     condition = ''
     take = 0
-    
+
 print(observedList)
 print(observedCondition)
 node = Node(None,None,None,None,None)
 
 testtree = tree.createTree()
+testtree.startTree()
 for i in range(0,len(testtree.nodes)):
-    print(testtree.nodes[i].name)
-    
+    print(testtree.nodes[i].status)
+
 
 
 # print(dictSnowTrue)
