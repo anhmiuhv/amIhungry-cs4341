@@ -7,13 +7,10 @@
 
 #!/usr/bin/env python3
 import argparse
-<<<<<<< HEAD
 import node
 import tree
-=======
 from dictionary import *
 
->>>>>>> e8f5c6515e6d873b648715aa1823dbce7dfba85c
 
 #parsing option from users
 parser = argparse.ArgumentParser(description='Please give mr.weather a needed information')
