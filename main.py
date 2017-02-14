@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # Author:
 #     Khoi Doan
 #     Linh Hoang
@@ -5,10 +7,10 @@
 #     Duong Nguyen
 
 
-#!/usr/bin/env python3
+
 import argparse
 import node
-from tree import Tree
+import tree
 from dictionary import *
 from node import Node
 
@@ -63,10 +65,12 @@ for i in range(0,len(args.observed)):
 print(observedList)
 print(observedCondition)
 node = Node(None,None,None,None,None)
-tree = Tree(node)
+
 testtree = tree.createTree()
 for i in range(0,len(testtree.nodes)):
     print(testtree.nodes[i].name)
+    
+
 
 # print(dictSnowTrue)
 # class Node:

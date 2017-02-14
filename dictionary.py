@@ -1,7 +1,7 @@
 #characters
-dictHumidity= {'low':0.2, 'medium':0.7, 'high' : 1.0}
-dictTemp = {'warm':0.1 ,'mild':0.5 ,'cold':1}
-dictDay = {'weekend':0.2,'weekday':1} 
+dictHumidity= {'low':0.2, 'medium':0.5, 'high' : 0.3}
+dictTemp = {'warm':0.1 ,'mild':0.4 ,'cold':0.5}
+dictDay = {'weekend':0.2,'weekday':0.8} 
 
 #cpt of two things
 #dict of Icy inputs are humid first, temp second

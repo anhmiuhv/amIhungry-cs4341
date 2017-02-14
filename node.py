@@ -1,3 +1,5 @@
+from random import randint
+
 class Node:
     #parents format: array of ids example: [1,2]
     #cpt format example: {['true', 'true']: 0.2
@@ -25,5 +27,16 @@ class Node:
             str+=p.status
         
         return str
+    
+    #this function should only be used to initialize the root node based on its characters table
+    def startRoot(self):
+        i = randint(0, 1000) / 1000
+        prev = 0.0
+        for key, value in self.characters.items():
+            if i >= prev and i < value + prev:
+                self.status = key
+                return
+            prev = value + prev
+        
 
     
