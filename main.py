@@ -8,8 +8,9 @@
 #!/usr/bin/env python3
 import argparse
 import node
-import tree
+from tree import Tree
 from dictionary import *
+from node import Node
 
 
 #parsing option from users
@@ -61,9 +62,13 @@ for i in range(0,len(args.observed)):
     
 print(observedList)
 print(observedCondition)
-tree.createTree()
+node = Node(None,None,None,None,None)
+tree = Tree(node)
+testtree = tree.createTree()
+for i in range(0,len(testtree.nodes)):
+    print(testtree.nodes[i].name)
 
-print(dictSnowTrue)
+# print(dictSnowTrue)
 # class Node:
 #     def __init__(self, initial, condition):
 #         for i in initial:
