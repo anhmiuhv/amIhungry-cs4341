@@ -2,7 +2,7 @@ class Node:
     #parents format: array of ids example: [1,2]
     #cpt format example: {['true', 'true']: 0.2
     #the first element in nature is true used in cpt
-    def __init__(self,name, characters = {}, parents, cpt, nature = []):
+    def __init__(self,name, characters={}, parents = [], cpt={}, nature = []):
         self.name = name
         #dictionary for root node, is a string : float array
         self.characters = characters
@@ -10,6 +10,7 @@ class Node:
         self.parents = parents
         #dictionary of string : float
         self.cpt = cpt
+        self.nature = nature
         self.status = ''
     
     def __hash__(self):

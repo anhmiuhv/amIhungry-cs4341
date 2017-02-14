@@ -7,6 +7,8 @@
 
 #!/usr/bin/env python3
 import argparse
+import node
+import tree
 
 #parsing option from users
 parser = argparse.ArgumentParser(description='Please give mr.weather a needed information')
@@ -57,6 +59,7 @@ for i in range(0,len(args.observed)):
     
 print(observedList)
 print(observedCondition)
+tree.createTree()
 # class Node:
 #     def __init__(self, initial, condition):
 #         for i in initial:
