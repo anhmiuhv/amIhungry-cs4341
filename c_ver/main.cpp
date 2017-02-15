@@ -129,12 +129,15 @@ int main(int argc, char** argv){
     });
 
     double stdev = sqrt(accum / (res1.size()-1));
+    double confintplus = m + 2*stdev/sqrt(res1.size());
+    double confintminus = m - 2*stdev/sqrt(res1.size());
 
     int c = count1 + count2 + count3 + count4;
     if (c != 0) {
         cout << "Total number of samples: " << iteration * 1000 << endl;
         cout << "Number of non-rejected samples: " << c << endl;
         cout << "Standard deviation is: " << stdev << endl;
+        cout << "95% confidence interval: [" << confintminus << ", " << confintplus << "]" << endl;
 
         cout << "Probability of the queried node: " << m << endl;
     }
