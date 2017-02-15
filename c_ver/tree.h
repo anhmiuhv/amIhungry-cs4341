@@ -13,4 +13,6 @@ class Tree {
     void startTree();
 };
 
+Tree createTree();
+
 #endif

@@ -11,4 +11,5 @@ extern std::map<std::string, double> dictSnowTrue;
 extern std::map<std::string, double> dictCloudTrue;
 extern std::map<std::string, double> dictExamTrue;
 extern std::map<std::string, double> dictStressTrue;
+void initDicts();
 #endif
