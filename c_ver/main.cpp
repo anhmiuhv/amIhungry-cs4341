@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <vector>
 #include <map>
+#include <utility>
+#include <thread>
 #include "tree.h"
 using namespace std;
 inline bool isInteger(const std::string & s)
@@ -26,6 +28,30 @@ vector<string> SplitString(const char* str,const char* d) {
     string num2 =  str1.substr(pos + 1);
     result.push_back(num2);
     return result;
+}
+
+void threads(int iterations, pair<int, int> *res, map<string, string> observedCondition, map<string, string> queryList) {
+    int countobserved = 0;
+    int countquery = 0;
+    Tree tr = createTree();
+    
+    for (int i = 0; i < iterations; i++) {
+        bool isobserved = true; 
+        tr.startTree();
+        map<string, string> result = tr.printTree();
+        for (auto const &x: observedCondition) {
+            if (x.second != result[x.first])
+                isobserved = false;
+        }
+        if (isobserved) {
+            countobserved++;
+            for (auto const &x: queryList) {
+                if (x.second == result[x.first])
+                    countquery++;
+            }
+        }
+    }
+    res->first = countquery; res->second = countobserved;
 }
 
 int main(int argc, char** argv){
@@ -69,22 +95,17 @@ int main(int argc, char** argv){
     int countquery = 0;
     Tree tr = createTree();
     
-    for (int i = 0; i < iteration; i++) {
-        bool isobserved = true; 
-        tr.startTree();
-        map<string, string> result = tr.printTree();
-        for (auto const &x: observedCondition) {
-            if (x.second != result[x.first])
-                isobserved = false;
-        }
-        if (isobserved) {
-            countobserved++;
-            for (auto const &x: queryList) {
-                if (x.second == result[x.first])
-                    countquery++;
-            }
-        }
-    }
+    pair<int, int> res1, res2, res3, res4;
+    thread firstt(threads, iteration/4, &res1, observedCondition, queryList);
+    thread secondt(threads, iteration/4, &res2, observedCondition, queryList);
+    thread thirdt(threads, iteration/4, &res3, observedCondition, queryList);
+    thread fourtht(threads, iteration/4, &res4, observedCondition, queryList);
+    firstt.join();
+    secondt.join();
+    thirdt.join();
+    fourtht.join();
+    countquery = res1.first + res2.first + res3.first + res4.first;
+    countobserved = res1.second + res2.second + res3.second + res4.second;
     if (countobserved != 0) {
         cout << "Probability of the queried node: " << ((double) countquery / countobserved) << endl;
     }
