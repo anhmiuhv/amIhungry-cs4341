@@ -8,6 +8,7 @@
 #include <utility>
 #include <numeric>
 #include <thread>
+#include <algorithm>
 #include "tree.h"
 using namespace std;
 inline bool isInteger(const std::string & s)
@@ -66,7 +67,7 @@ void threads(int iterations, vector<float> *res, int* count, map<string, string>
 
 int main(int argc, char** argv){
     srand (time(NULL));
-    if (argc < 4) {
+    if (argc < 3) {
         cout << "too few argument" << endl;
         return 1;
     }
