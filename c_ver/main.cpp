@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include <numeric>
 #include <thread>
 #include "tree.h"
 using namespace std;
@@ -24,34 +25,43 @@ vector<string> SplitString(const char* str,const char* d) {
     string str1(str);
     std::size_t pos = str1.find(d);
     string num1 = str1.substr(0, pos);
+    std::transform(num1.begin(), num1.end(), num1.begin(), ::tolower);
     result.push_back(num1);
+
     string num2 =  str1.substr(pos + 1);
+    std::transform(num2.begin(), num2.end(), num2.begin(), ::tolower);
     result.push_back(num2);
+
     return result;
 }
 
-void threads(int iterations, pair<int, int> *res, map<string, string> observedCondition, map<string, string> queryList) {
-    int countobserved = 0;
-    int countquery = 0;
-    Tree tr = createTree();
+void threads(int iterations, vector<float> *res, int* count, map<string, string> observedCondition, map<string, string> queryList) {
     
+    Tree tr = createTree();
+    *count = 0;
     for (int i = 0; i < iterations; i++) {
-        bool isobserved = true; 
-        tr.startTree();
-        map<string, string> result = tr.printTree();
-        for (auto const &x: observedCondition) {
-            if (x.second != result[x.first])
-                isobserved = false;
-        }
-        if (isobserved) {
-            countobserved++;
-            for (auto const &x: queryList) {
-                if (x.second == result[x.first])
-                    countquery++;
+        int countobserved = 0;
+        int countquery = 0;
+        for (int j = 0; j < 1000; j++){
+            bool isobserved = true;
+            tr.startTree();
+            map<string, string> result = tr.printTree();
+            for (auto const &x: observedCondition) {
+                if (x.second != result[x.first])
+                    isobserved = false;
+            }
+            if (isobserved) {
+                countobserved++;
+                for (auto const &x: queryList) {
+                    if (x.second == result[x.first])
+                        countquery++;
+                }
             }
         }
+        *count = *count + countobserved;
+        res->push_back((float)countquery / countobserved);
     }
-    res->first = countquery; res->second = countobserved;
+
 }
 
 int main(int argc, char** argv){
@@ -63,7 +73,7 @@ int main(int argc, char** argv){
     map<string, string> queryList;
     map<string, string> observedCondition;
     bool first = true;
-    int iteration;
+    int iteration = 0;
     for (int i = 1; i < argc; i++){
         if (isInteger(argv[i]) && first == true){
             first = false;
@@ -79,7 +89,7 @@ int main(int argc, char** argv){
                 queryList[result[0]] = result[1];
             } else {
                 vector<string> result = SplitString(argv[i], "=");
-                
+
                 observedCondition[result[0]] = result[1];
             }
 
@@ -87,30 +97,48 @@ int main(int argc, char** argv){
 
 
     }
-   // for (auto const& f: observedCondition){
-   //     cout << f.first << endl;
-   //     cout << f.second << endl;
-   // }
+    // for (auto const& f: observedCondition){
+    //     cout << f.first << endl;
+    //     cout << f.second << endl;
+    // }
     int countobserved = 0;
     int countquery = 0;
     Tree tr = createTree();
-    
-    pair<int, int> res1, res2, res3, res4;
-    thread firstt(threads, iteration/4, &res1, observedCondition, queryList);
-    thread secondt(threads, iteration/4, &res2, observedCondition, queryList);
-    thread thirdt(threads, iteration/4, &res3, observedCondition, queryList);
-    thread fourtht(threads, iteration/4, &res4, observedCondition, queryList);
+
+    vector<float> res1, res2, res3, res4;
+    int count1, count2, count3, count4;
+    if (iteration < 4) iteration = 4;
+    thread firstt(threads, iteration /4, &res1, &count1, observedCondition, queryList);
+    thread secondt(threads, iteration/4, &res2, &count2, observedCondition, queryList);
+    thread thirdt(threads, iteration/4, &res3, &count3, observedCondition, queryList);
+    thread fourtht(threads, iteration/4, &res4, &count4, observedCondition, queryList);
     firstt.join();
     secondt.join();
     thirdt.join();
     fourtht.join();
-    countquery = res1.first + res2.first + res3.first + res4.first;
-    countobserved = res1.second + res2.second + res3.second + res4.second;
-    if (countobserved != 0) {
-        cout << "Probability of the queried node: " << ((double) countquery / countobserved) << endl;
+    res1.insert(res1.end(), res2.begin(), res2.end());
+    res1.insert(res1.end(), res3.begin(), res3.end());
+    res1.insert(res1.end(), res4.begin(), res4.end());
+    double sum = std::accumulate(std::begin(res1), std::end(res1), 0.0);
+    double m =  sum / res1.size();
+
+    double accum = 0.0;
+    std::for_each (std::begin(res1), std::end(res1), [&](const double d) {
+        accum += (d - m) * (d - m);
+    });
+
+    double stdev = sqrt(accum / (res1.size()-1));
+
+    int c = count1 + count2 + count3 + count4;
+    if (c != 0) {
+        cout << "Total number of samples: " << iteration * 1000 << endl;
+        cout << "Number of non-rejected samples: " << c << endl;
+        cout << "Standard deviation is: " << stdev << endl;
+
+        cout << "Probability of the queried node: " << m << endl;
     }
     else {
         cout << "No node with observed condition found." << endl;
     }
-  
+    
 }

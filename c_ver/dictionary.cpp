@@ -27,10 +27,10 @@ void initDicts() {
     dictIcyTrue.emplace("highwarm", 0.005);
     dictIcyTrue.emplace("highmild", 0.01);
     dictIcyTrue.emplace("highcold", 0.35);
-    dictSnowTrue.emplace("lowwarm", 0.00001);
+    dictSnowTrue.emplace("lowwarm", 0.0001);
     dictSnowTrue.emplace("lowmild", 0.001);
     dictSnowTrue.emplace("lowcold", 0.1);
-    dictSnowTrue.emplace("mediumwarm", 0.00001);
+    dictSnowTrue.emplace("mediumwarm", 0.0001);
     dictSnowTrue.emplace("mediummild", 0.0001);
     dictSnowTrue.emplace("mediumcold", 0.25);
     dictSnowTrue.emplace("highwarm", 0.0001);

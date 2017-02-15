@@ -54,7 +54,7 @@ Tree createTree() {
     x.push_back(snowNode);
     Node *cloudyNode = new Node("cloudy",dictCloudTrue,x,truefalse);
     x.push_back(dayNode);
-    Node *examNode = new Node("exam",dictExamTrue,x,truefalse);
+    Node *examNode = new Node("exams",dictExamTrue,x,truefalse);
     x.clear();
     x.push_back(snowNode);
     x.push_back(examNode);

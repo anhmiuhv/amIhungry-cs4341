@@ -10,8 +10,8 @@ dictIcyTrue.update({'mediumwarm':0.001,'mediummild':0.03,'mediumcold':0.2})
 dictIcyTrue.update({'highwarm':0.005,'highmild':0.01,'highcold':0.35})
 
 #dict of snow inputs are humid first, temp second
-dictSnowTrue = {'lowwarm':0.00001, 'lowmild':0.001,'lowcold':0.1}
-dictSnowTrue.update({'mediumwarm':0.00001,'mediummild':0.0001,'mediumcold':0.25})
+dictSnowTrue = {'lowwarm':0.0001, 'lowmild':0.001,'lowcold':0.1}
+dictSnowTrue.update({'mediumwarm':0.0001,'mediummild':0.0001,'mediumcold':0.25})
 dictSnowTrue.update({'highwarm':0.0001,'highmild':0.001,'highcold':0.4})
 
 #dict of cloud input is cloud
