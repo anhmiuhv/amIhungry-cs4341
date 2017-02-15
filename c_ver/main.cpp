@@ -1,10 +1,11 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <string>
 #include <sstream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
 #include <map>
+#include "tree.h"
 using namespace std;
 inline bool isInteger(const std::string & s)
 {
@@ -28,12 +29,13 @@ vector<string> SplitString(const char* str,const char* d) {
 }
 
 int main(int argc, char** argv){
+    srand (time(NULL));
     if (argc < 4) {
         cout << "too few argument" << endl;
         return 1;
     }
-    map<string, string> querryList;
-    map<string, string> querryCondition;
+    map<string, string> queryList;
+    map<string, string> observedCondition;
     bool first = true;
     int iteration;
     for (int i = 1; i < argc; i++){
@@ -48,20 +50,46 @@ int main(int argc, char** argv){
         } else {
             if (first) {
                 vector<string> result = SplitString(argv[i], "=");
-                querryList[result[0]] = result[1];
+                queryList[result[0]] = result[1];
             } else {
                 vector<string> result = SplitString(argv[i], "=");
                 
-                querryCondition[result[0]] = result[1];
+                observedCondition[result[0]] = result[1];
             }
 
         }
 
 
     }
-    for (auto const& f: querryList){
-        cout << f.first << endl;
-        cout << f.second << endl;
+   // for (auto const& f: observedCondition){
+   //     cout << f.first << endl;
+   //     cout << f.second << endl;
+   // }
+    int countobserved = 0;
+    int countquery = 0;
+    Tree tr = createTree();
+    
+    for (int i = 0; i < iteration; i++) {
+        bool isobserved = true; 
+        tr.startTree();
+        map<string, string> result = tr.printTree();
+        for (auto const &x: observedCondition) {
+            if (x.second != result[x.first])
+                isobserved = false;
+        }
+        if (isobserved) {
+            countobserved++;
+            for (auto const &x: queryList) {
+                if (x.second != result[x.first])
+                    countquery++;
+            }
+        }
+    }
+    if (countobserved != 0) {
+        cout << "Probability of the queried node: " << ((double) countquery / countobserved) << endl;
+    }
+    else {
+        cout << "No node with observed condition found." << endl;
     }
   
 }

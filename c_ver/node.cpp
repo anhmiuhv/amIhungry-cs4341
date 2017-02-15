@@ -1,5 +1,6 @@
 #include "node.h"
 #include <cstdlib>
+#include <iostream>
 
 Node::Node(std::string name, std::map<std::string, double> cpt, std::vector<Node*> parents, std::pair<std::string, std::string> nature) {
     this->name = name;
@@ -32,7 +33,7 @@ void Node::startRoot() {
     double i = (double) rand() / RAND_MAX;
     double prev = 0;
     for (auto const& x: cpt) {
-        if ((i >= prev) && (i <= x.second)) {
+        if ((i >= prev) && (i <= x.second + prev)) {
             setStatus(x.first);
             return;
         }

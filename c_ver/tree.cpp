@@ -1,6 +1,7 @@
 #include "tree.h"
 #include "dictionary.h"
 #include <algorithm>
+#include <iostream>
 
 Tree::Tree(std::vector<Node*> nodes) {
     this->nodes = nodes;
@@ -21,16 +22,23 @@ void Tree::startTree() {
     }
 }
 
+std::map<std::string, std::string> Tree::printTree() {
+    std::map<std::string, std::string> result;
+    for (Node* node: nodes) {
+        result.emplace(node->getName(), node->getStatus());
+    }
+}
+
 Tree createTree() {
+    // std::map<std::string, double> dictHumidity;
+    // std::map<std::string, double> dictTemp;
+    // std::map<std::string, double> dictDay;
+    // std::map<std::string, double> dictIcyTrue;
+    // std::map<std::string, double> dictSnowTrue;
+    // std::map<std::string, double> dictCloudTrue;
+    // std::map<std::string, double> dictExamTrue;
+    // std::map<std::string, double> dictStressTrue;
     initDicts();
-    std::map<std::string, double> dictHumidity;
-    std::map<std::string, double> dictTemp;
-    std::map<std::string, double> dictDay;
-    std::map<std::string, double> dictIcyTrue;
-    std::map<std::string, double> dictSnowTrue;
-    std::map<std::string, double> dictCloudTrue;
-    std::map<std::string, double> dictExamTrue;
-    std::map<std::string, double> dictStressTrue;
     Node *humidityNode = new Node("humidity",dictHumidity);
     Node *tempNode = new Node("temperature",dictTemp);
     Node *dayNode = new Node("day",dictDay);
