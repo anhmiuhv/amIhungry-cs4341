@@ -80,7 +80,7 @@ int main(int argc, char** argv){
         if (isobserved) {
             countobserved++;
             for (auto const &x: queryList) {
-                if (x.second != result[x.first])
+                if (x.second == result[x.first])
                     countquery++;
             }
         }

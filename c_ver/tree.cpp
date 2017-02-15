@@ -27,6 +27,7 @@ std::map<std::string, std::string> Tree::printTree() {
     for (Node* node: nodes) {
         result.emplace(node->getName(), node->getStatus());
     }
+    return result;
 }
 
 Tree createTree() {
