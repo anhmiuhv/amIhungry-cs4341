@@ -14,6 +14,9 @@ import tree
 from dictionary import *
 from node import Node
 from math import sqrt
+import time
+start_time = time.time()
+
 #parsing option from users
 parser = argparse.ArgumentParser(description='Please give mr.weather a needed information')
 parser.add_argument('query', help='the query node')
@@ -99,7 +102,7 @@ if (countobserved != 0):
     print("95% confidence interval: " + str(prob) + " + " + str(2*sd/sqrt(countobserved))) 
 else:
     print("No node with observed condition found.")
-
+print("Time take to run: " + str(time.time() - start_time) + " s")
 
 
 # print(dictSnowTrue)
