@@ -1,4 +1,4 @@
-from random import randint
+from random import random
 
 class Node:
     #parents format: array of ids example: [1,2]
@@ -30,7 +30,8 @@ class Node:
 
     #this function should only be used to initialize the root node based on its characters table
     def startRoot(self):
-        i = randint(0, 1000) / 1000
+#         i = randint(0, 1000) / 1000
+        i = random()
         prev = 0.0
         for key, value in self.characters.items():
             if i >= prev and i <= value + prev:
@@ -39,7 +40,8 @@ class Node:
             prev = value + prev
 
     def startNode(self):
-        i = randint(0, 1000) / 1000
+#         i = randint(0, 1000) / 1000
+        i = random()
         if i <= self.cpt[self.translateParent()]:
             self.setStatus(self.nature[0])
         else:

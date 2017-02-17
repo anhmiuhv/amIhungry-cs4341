@@ -103,7 +103,6 @@ if (countobserved != 0):
 else:
     print("No node with observed condition found.")
     
-
     
 print("Time take to run: " + str(time.time() - start_time) + " s")
 
