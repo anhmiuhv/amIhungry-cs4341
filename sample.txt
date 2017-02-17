@@ -5,4 +5,4 @@ day=weekday 1000
 snow=true 1000 humidity=low temperature=warm day=weekend icy=true cloudy=false exam=true stress=high 
 icy=true 1000 exam=true stress=high 
 cloudy=false 1000 day=weekday exam=true stress=high
-snow=false 1000 temperature=cold day=weekend icy=true cloudy=true exam=true 
+snow=false 1000 temperature=cold day=weekend humidity=low cloudy=true
