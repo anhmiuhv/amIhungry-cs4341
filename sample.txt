@@ -1,0 +1,8 @@
+// These are the test cases. While the number of nodes is correct, we tested with different numbers of 
+// iterations for the purpose of the write up that is not shown here. The numbers used were 100, 500, 1000, 
+// 10000, 100000
+day=weekday 1000
+snow=true 1000 humidity=low temperature=warm day=weekend icy=true cloud=false exam=true stress=false 
+icy=true 1000 exam=true stress=false 
+cloud=false 1000 day=weekday exam=true stress=true
+snow=false 1000 temperature=cold day=weekend snow=true cloud=true exam=true 
