@@ -13,8 +13,7 @@ import node
 import tree
 from dictionary import *
 from node import Node
-
-
+from math import sqrt
 #parsing option from users
 parser = argparse.ArgumentParser(description='Please give mr.weather a needed information')
 parser.add_argument('query', help='the query node')
@@ -50,7 +49,7 @@ observedCondition = []
 query = ''
 condition = ''
 take = 0
-for i in range(0,len(args.observed)):
+for i in range(0,len(args.observed)):   
     for j in args.observed[i]:
         if j == '=':
             take = 1
@@ -93,7 +92,11 @@ for i in range(0, args.iteration):
 print("Total number of samples: ", str(args.iteration))
 print("Number of non-rejected samples: ", str(countobserved))
 if (countobserved != 0):
-    print("Probability of the queried node: " + str(countquery/countobserved))
+    prob = countquery/countobserved
+    print("Probability of the queried node: " + str(prob))
+    sd = sqrt(prob*(1-prob) )
+    print("Standard deviation: " + str(sd ))
+    print("95% confidence interval: " + str(prob) + " + " + str(2*sd/sqrt(countobserved))) 
 else:
     print("No node with observed condition found.")
 
