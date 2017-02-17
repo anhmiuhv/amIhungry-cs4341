@@ -102,6 +102,11 @@ if (countobserved != 0):
     print("95% confidence interval: " + str(prob) + " + " + str(2*sd/sqrt(countobserved))) 
 else:
     print("No node with observed condition found.")
+    
+    
+    
+    
+    
 print("Time take to run: " + str(time.time() - start_time) + " s")
 
 
