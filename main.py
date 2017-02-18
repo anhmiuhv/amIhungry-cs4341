@@ -99,7 +99,7 @@ if (countobserved != 0):
     print("Probability of the queried node: " + str(prob))
     sd = sqrt(prob*(1-prob) )
     print("Standard deviation: " + str(sd ))
-    print("95% confidence interval: " + str(prob) + " + " + str(2*sd/sqrt(countobserved))) 
+    print("95% confidence interval: " + str(prob) + " \u00B1 " + str(2*sd/sqrt(countobserved))) 
 else:
     print("No node with observed condition found.")
     
